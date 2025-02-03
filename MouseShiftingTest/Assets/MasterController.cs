@@ -5,6 +5,7 @@ using UnityEngine;
 
 // In Adaptic + retargetin project this script manages the whole logic.
 // In second project this mannages only the user logic, locally and in network
+//IPunObservable is an interface required by Photon to synchronise variables over a network
 public class MasterController : MonoBehaviour, IPunObservable
 {
     // Networking mannagement here//
@@ -17,10 +18,11 @@ public class MasterController : MonoBehaviour, IPunObservable
     public static GameObject LocalPlayerInstance;
     #endregion
 
+    //Render appearance of players' head and hand objects
     public Renderer rendHead;
     public Renderer rendHand;
 
-
+    //Enum to define conditions
     public enum CONDITION
     {
         SM_RT,
@@ -29,10 +31,12 @@ public class MasterController : MonoBehaviour, IPunObservable
         NM_OO
     }
 
+    /* --- SCRIPTS --- */
     // Script for manage tracking. 
     private TrackerMannager trackerMannager;
 
     // Information for the user. No sync here
+    //Handles user notifications, like guiding players or feedback
     private NotificationsMannager notificationsMannager;
 
     // Survey to be performed in each case.
@@ -45,6 +49,7 @@ public class MasterController : MonoBehaviour, IPunObservable
 
     private Logic logic;
 
+    /* --- OTHER FIELDS -- */
     // Base condition
     public CONDITION condition;
   
@@ -53,6 +58,8 @@ public class MasterController : MonoBehaviour, IPunObservable
     public bool surveyActivated;
 
 
+    // - Sets the GameObject's name to the network player's nickname
+    // - PhotonView.owner identifies the player owning this object
     private void Awake()
     {
         this.gameObject.name = GetComponent<PhotonView>().owner.NickName;
@@ -61,15 +68,22 @@ public class MasterController : MonoBehaviour, IPunObservable
     // Start is called before the first frame update
     void Start()
     {
-        
+        //GetComponent is retrieving instances of other scripts that are attached
+        //  to the same GameObject
+        //TrackerManager manages player tracking and interactions with virtual objects.
         trackerMannager = gameObject.GetComponent<TrackerMannager>();
+        //NotificationsManager handles the visual notifications for the user
         notificationsMannager = gameObject.GetComponent<NotificationsMannager>();
+        //SurveyManager allows use of in-game surveys to collect data for feedback
         surveyMannager = gameObject.GetComponent<SurveyMannager>();
+        //Logic controls the game's core logic like player turns
         logic = gameObject.GetComponent<Logic>();
+        //PropManager controls the objects that the player can manipulate
         propMannager = gameObject.GetComponent<PropMannager>();
+        //PersistanceManager stores data from the trials
         persistanceManager = gameObject.GetComponent<PersistanceManager>();
 
-   
+        //Sets the initial state to false to make sure the survey system is disabled
         surveyActivated = false;
         
         // TODO the steps should be shared. Notification Mannager to be changes drasticly
@@ -79,6 +93,7 @@ public class MasterController : MonoBehaviour, IPunObservable
          
     }
 
+    //Turn transparency on/off depending on whose turn it is
     public void changeTransparency(bool onTurn)
     {
         Color c = rendHead.material.color;
@@ -91,6 +106,8 @@ public class MasterController : MonoBehaviour, IPunObservable
         rendHand.material.color = c;
     }
 
+    // - Update stage is the object belongs to the local player
+    // - Only the owning player updates because of PhotonView?
     public void changeStage(LogicGame.STAGE nStage)
     {
         if (GetComponent<PhotonView>().isMine)
@@ -99,7 +116,8 @@ public class MasterController : MonoBehaviour, IPunObservable
         }
     }
 
-
+    //Recording of the trial
+    // - gathers info like trial ID and saves the data
     public void startRecording(string idTrial)
     {
         if (GetComponent<PhotonView>().isMine)
@@ -110,6 +128,8 @@ public class MasterController : MonoBehaviour, IPunObservable
             persistanceManager.saveGeneral();
         }
     }
+
+    //Record to the persistance manager for the local user
     public void setRecording(bool rRecord)
     {
 
@@ -117,6 +137,7 @@ public class MasterController : MonoBehaviour, IPunObservable
             persistanceManager.recording = rRecord;
     }
 
+    //Updates the condition and enables the PropManager if the condition is SM_RT
     public void setCondition(CONDITION nCondition)
     {
         if(GetComponent<PhotonView>().isMine)
@@ -127,6 +148,7 @@ public class MasterController : MonoBehaviour, IPunObservable
         }
     }
 
+    //When condition SM_RT is met, send appropriate command to Arduino
     public void presetPtop(PropMannager.PRESET_TYPE presetType)
     {
         if(GetComponent<PhotonView>().isMine && this.condition == CONDITION.SM_RT)

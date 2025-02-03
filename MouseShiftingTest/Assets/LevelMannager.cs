@@ -48,8 +48,12 @@ public class LevelMannager : Photon.PunBehaviour, IPunObservable
         
     }
 
+    //called when a player connects to the game
+    //spawns the player using spawnPlayer
     public void spawnConnectedPlayer()
     {
+
+        //track which headset is being used
         int platformSelected = PlayerPrefs.GetInt("Platform");
         currentPlatform = (Platform)platformSelected;
         //Debug.Log("The platform selected is: " + currentPlatform.ToString());
@@ -61,7 +65,7 @@ public class LevelMannager : Photon.PunBehaviour, IPunObservable
         {
             PhotonPlayer actualPlayer = PhotonNetwork.player;
             //Debug.Log("Nickname of the local is " + actualPlayer.NickName);
-            spawnPlayer(actualPlayer.NickName, currentPlatform);
+            spawnPlayer(actualPlayer.NickName, currentPlatform); //spanw player at currentplatform location
         }
         else
         {
@@ -69,6 +73,7 @@ public class LevelMannager : Photon.PunBehaviour, IPunObservable
         }
     }
 
+    //calculates spawn position based on player's id
     public void spawnPlayer(string playerNickname, Platform destPlatform)
     {
         char[] nickNamechars = playerNickname.ToCharArray();
@@ -111,6 +116,7 @@ public class LevelMannager : Photon.PunBehaviour, IPunObservable
         PhotonNetwork.LeaveRoom();
     }
 
+    //Getter function to return current platform selected
     public Platform getCurrentPlatform()
     {
         return currentPlatform;

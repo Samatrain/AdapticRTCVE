@@ -4,11 +4,14 @@ using System.IO;
 using UnityEngine;
 using System;
 
+// - PersistanceManager is mainly logging information like position, rotation, timestamps,
+//      trial IDs and task progress
+// - Data is written to CSV files for storage
 public class PersistanceManager : MonoBehaviour
 {
 
     private string hpLine;
-    private string rtLine;
+    private string rtLine; //runtime? data
     public int counter;
 
     public float topRegisterToSave;
@@ -152,11 +155,13 @@ public class PersistanceManager : MonoBehaviour
     public bool recording;
     public bool killProcess;
 
+    //Local data saving
     private IEnumerator saveLocal(string path, string[] entries, string[] values)
     {
         if (recording)
         { 
             StreamWriter sw = null;
+            //Create a file to write to if it doesn't exist
             if (!File.Exists(path))
             {
                 sw = new StreamWriter(path, true);
@@ -170,6 +175,7 @@ public class PersistanceManager : MonoBehaviour
         yield return null;
     }
 
+    //Save runtime and pose data
     private IEnumerator saveLocal(string path, string[] entries, string values)
     {
         if (recording)
@@ -215,15 +221,16 @@ public class PersistanceManager : MonoBehaviour
     private void Start()
     {
 
+        //Check if local user's component
         if (!GetComponent<PhotonView>().isMine)
         {
             this.enabled = false;
         }
-        topRegisterToSave = 150;
-        recording = false;
-        PATH_LOCAL = Application.dataPath + @"/Logout/";
+        topRegisterToSave = 150; //threshold for saving
+        recording = false; //recording starts as default
+        PATH_LOCAL = Application.dataPath + @"/Logout/"; //save path
         if (!Directory.Exists(PATH_LOCAL))
-            Directory.CreateDirectory(PATH_LOCAL);
+            Directory.CreateDirectory(PATH_LOCAL); //create directory if it doesnt exist
         counterMovements = 1;
         counter = 0;
         
@@ -241,8 +248,9 @@ public class PersistanceManager : MonoBehaviour
     public void saveGeneral( )
     {
 
+        //extract station ID from the object name
         idStation = Int32.Parse(gameObject.name.ToCharArray()[gameObject.name.Length - 1] + "");
-        string timeStamp = System.DateTime.Now.ToString("HH:mm:ss dd/MM/yy");
+        string timeStamp = System.DateTime.Now.ToString("HH:mm:ss dd/MM/yy"); //get current timestamp
         
 
 
@@ -254,12 +262,13 @@ public class PersistanceManager : MonoBehaviour
          StartCoroutine(saveLocal(pathLocal, entries2, values));;
     }
 
+    //initalise movement-related data
     public void startDocking(int partMovement)
     {
-        taskPart = partMovement;
-        sw = Stopwatch.StartNew();
-        counterMovements++;
-        movementId = System.DateTime.Now.ToString("HHmmss") +"N" + counterMovements;
+        taskPart = partMovement; //set the current task part
+        sw = Stopwatch.StartNew(); //start stopwatch timer
+        counterMovements++; //increment movement counter
+        movementId = System.DateTime.Now.ToString("HHmmss") +"N" + counterMovements; //generate unique movement ID
        // currentStage = levelController.currenStage.ToString("G");
     }
 
@@ -271,6 +280,8 @@ public class PersistanceManager : MonoBehaviour
         Vector3 finalPosition = Vector3.zero;
         Quaternion finalRotation = Quaternion.identity;
         string shape = "";
+
+        //if an object is benig tracked, log its position and rotation
         if (trackedObject != null)
         {
             finalPosition = trackedObject.gameObject.transform.position;

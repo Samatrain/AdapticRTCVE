@@ -11,6 +11,7 @@ using System;
 public class PropMannager : MonoBehaviour
 {
 
+    //presets for the different physical objects
     public enum PRESET_TYPE
     {
         NONE,
@@ -21,11 +22,14 @@ public class PropMannager : MonoBehaviour
 
     private MasterController masterController;
 
+    //hardcoded to COM3 connection for arduino?
+    //portName is a variable to be assigned in Unity's inspector
     public static string serialName = @"\\.\COM3";
     public string portName;
 
     public SerialPort mySPort;// = new SerialPort(serialName, 115200);
 
+    //open the serial port for communication
     public void openPort()
     {
         mySPort.Open();
@@ -33,15 +37,20 @@ public class PropMannager : MonoBehaviour
        // if(masterController.isDemo)
          //   mySPort.Write("<-99,4>");
     }
+
     // Start is called before the first frame update
+    //initialises the serial connection when conditions arem et
     void Start()
     {
 
+        //execute when the object is controlled by the local player (PhotonView.isMine)
         masterController = GetComponent<MasterController>();
         if (!GetComponent<PhotonView>().isMine )
         {
             this.enabled = false;
         }
+        //what is condition SM_RT?
+        //when it is met, attempt to open the serial port
         if (masterController != null
                 && masterController.condition == MasterController.CONDITION.SM_RT)
         {
@@ -65,6 +74,8 @@ public class PropMannager : MonoBehaviour
     void Update()
     {
 
+        //when SM_RT condition is met, attempt to reopen the port
+        //basically keep checking to make sure its open
         if (masterController.condition == MasterController.CONDITION.SM_RT)
             try
             {
@@ -79,6 +90,7 @@ public class PropMannager : MonoBehaviour
             }
     }
 
+    //send commands to the device (arduino?)
     public void adapticCommand(PRESET_TYPE type)
     {
         
@@ -95,6 +107,7 @@ public class PropMannager : MonoBehaviour
         {
             mySPort.Write("<1>");
         }
+        //clear output buffer to keep communication clear
         mySPort.DiscardOutBuffer();
     }
 

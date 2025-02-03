@@ -220,7 +220,6 @@ public class LogicGame : MonoBehaviour, IPunObservable
         propSpecs.ghost.transform.localPosition = Vector3.zero;
     }
 
-
     [PunRPC]
     public void nextStep()
     {
