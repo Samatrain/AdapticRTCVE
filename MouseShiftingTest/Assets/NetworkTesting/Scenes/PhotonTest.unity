@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 16112689}
   - component: {fileID: 16112688}
   m_Layer: 5
-  m_Name: sectionView.1
+  m_Name: sectionView.1 - Photon Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -505,7 +505,7 @@ GameObject:
   - component: {fileID: 202145829}
   - component: {fileID: 202145828}
   m_Layer: 5
-  m_Name: sectionView.2
+  m_Name: sectionView.2 - Connected Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -580,7 +580,7 @@ GameObject:
   - component: {fileID: 649104629}
   - component: {fileID: 649104628}
   m_Layer: 5
-  m_Name: sectionView.3
+  m_Name: sectionView.3 - Disconnected Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
