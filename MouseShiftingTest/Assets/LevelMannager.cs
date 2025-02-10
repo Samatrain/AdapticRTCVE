@@ -11,7 +11,12 @@ public class LevelMannager : Photon.PunBehaviour, IPunObservable
      * Vive_VTVT : Vive headset, VT Hand tracking with Vive tracker (No finger tracking)k, VT Object tracking with Vive trackers
      * Vive_LMOT : Vive headset, LM Hand tracking with Leapmotion, OT Object tracking with Optitrack
      */
-    public enum Platform { Vive_HTVT, Vive_VTVT, Vive_LMOT };
+
+    /*
+     * Platform to add:
+     *  Oculus Quest 2 (OVRToolkit)
+     */
+    public enum Platform { Vive_HTVT, Vive_VTVT, Vive_LMOT, OVRPlayerController };
 
     static public LevelMannager Instance;
 
@@ -23,6 +28,10 @@ public class LevelMannager : Photon.PunBehaviour, IPunObservable
 
     [Tooltip("Prefab Vive_LMOT : Vive headset, LM Hand tracking with Leapmotion, OT Object tracking with Optitrack")]
     public GameObject UserViveLMOT;
+
+    //Check if this works for Oculus
+    //[Tooltip("Prefab OVRPlayerController")]
+    public GameObject UserOVRPlayerController;
 
     [Tooltip("Spawn location for participants")]
     public Transform[] spawnLocations;

@@ -22,6 +22,7 @@ public class NetworkMannager : Photon.PunBehaviour, IPunObservable
 
     //TODO Managemente of an UI to know the network state.
     // Previous experiments used a small dahsboard insied the room. Maybe.
+    // Connects to UINetwork script, updates text when users are connected.
     public UINetwork uINetwork;
 
     // Version. default parameter for us
@@ -123,6 +124,7 @@ public class NetworkMannager : Photon.PunBehaviour, IPunObservable
         // we don't want to do anything.
         if (isConnecting)
         {
+            //*Does this create a room for the second person to join?
             PhotonNetwork.JoinOrCreateRoom(ROOM_NAME, roomOptions, TypedLobby.Default);
         }
     }
