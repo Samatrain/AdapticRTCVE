@@ -48,7 +48,10 @@ public class LevelMannager : Photon.PunBehaviour, IPunObservable
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (UserOVRPlayerController == null)
+        {
+            Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'LevelMannager'", this)
+        }
     }
 
     // Update is called once per frame
