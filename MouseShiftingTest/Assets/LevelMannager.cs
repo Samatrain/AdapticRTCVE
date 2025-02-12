@@ -50,7 +50,7 @@ public class LevelMannager : Photon.PunBehaviour, IPunObservable
     {
         if (UserOVRPlayerController == null)
         {
-            Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'LevelMannager'", this)
+            Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'LevelMannager'", this);
         }
     }
 
