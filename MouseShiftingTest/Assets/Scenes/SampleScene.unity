@@ -7762,7 +7762,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020773929}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.016, y: -0.627, z: -0.018}
+  m_LocalPosition: {x: -0.016, y: 0.197, z: -0.787}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1707383829}
@@ -7942,7 +7942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.723
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7983,6 +7983,36 @@ PrefabInstance:
     - target: {fileID: 11400010, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: SnapRotation
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.524
+      objectReference: {fileID: 0}
+    - target: {fileID: 400012, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.524
+      objectReference: {fileID: 0}
+    - target: {fileID: 400014, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.524
+      objectReference: {fileID: 0}
+    - target: {fileID: 462068, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: _trackingOriginType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7984981075881350088, guid: ce816f2e6abb0504092c23ed9b970dfd,
+        type: 3}
+      propertyPath: viewIdField
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7984981075881350088, guid: ce816f2e6abb0504092c23ed9b970dfd,
+        type: 3}
+      propertyPath: instantiationId
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
@@ -9118,7 +9148,7 @@ MonoBehaviour:
   - {fileID: 1234312726}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 19
-  instantiationId: 19
+  instantiationId: 20
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!1 &1239771076
@@ -13802,13 +13832,15 @@ MonoBehaviour:
   UserViveVTVT: {fileID: 952661882236132541, guid: 36f525abccd4389469e4babc12c53ff5,
     type: 3}
   UserViveLMOT: {fileID: 0}
-  UserOVRPlayerController: {fileID: 0}
+  UserOVRPlayerController: {fileID: 1234312725}
   spawnLocations:
   - {fileID: 1020773930}
   - {fileID: 631268186}
   currentSpawnPosition: {fileID: 0}
-  currentPlatform: 0
-  users: []
+  currentPlatform: 3
+  users:
+  - {fileID: 0}
+  - {fileID: 0}
   playerId: 0
 --- !u!114 &1840562357
 MonoBehaviour:
