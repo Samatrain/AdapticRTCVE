@@ -92,22 +92,29 @@ public class LevelMannager : Photon.PunBehaviour, IPunObservable
         playerId = Int32.Parse(nickNamechars[playerNickname.Length - 1] + "");
         Transform spawnPosition = spawnLocations[playerId];
         currentSpawnPosition = spawnPosition;
+
         //GameObject.Find("/TutorialIslandP" + (playerId + 1) + "/Deco/Door/TutorialStatus/TutorialCanvas").transform.gameObject.SetActive(true);
         // TODO do whatever is needed it to assure correct orientation
         // Maybe locally
         GameObject userGameObject = null;
-        string contentNames = null;
+        string prefabName = null;
+
         switch (destPlatform)
         {
             case Platform.Vive_VTVT:
                 userGameObject = UserViveVTVT;
-                contentNames = "Vive_VTVT";
+                prefabName = "Vive_VTVT";
+                break;
+            case Platform.OVRPlayerController:
+                userGameObject = UserOVRPlayerController;
+                prefabName = "OVRPlayerController";
                 break;
         }
 
         if(userGameObject != null)
         {
-            PhotonNetwork.Instantiate(contentNames, spawnPosition.position, spawnPosition.rotation, 0);
+            GameObject playerInstance = PhotonNetwork.Instantiate(prefabName, spawnPosition.position, spawnPosition.rotation, 0);
+
         }
         else
         {

@@ -7986,15 +7986,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.524
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.524
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400014, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.524
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 462068, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8012,7 +8012,12 @@ PrefabInstance:
     - target: {fileID: 7984981075881350088, guid: ce816f2e6abb0504092c23ed9b970dfd,
         type: 3}
       propertyPath: instantiationId
-      value: 19
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7984981075881350088, guid: ce816f2e6abb0504092c23ed9b970dfd,
+        type: 3}
+      propertyPath: ownershipTransfer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
@@ -13829,8 +13834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UserViveHTVT: {fileID: 0}
-  UserViveVTVT: {fileID: 952661882236132541, guid: 36f525abccd4389469e4babc12c53ff5,
-    type: 3}
+  UserViveVTVT: {fileID: 0}
   UserViveLMOT: {fileID: 0}
   UserOVRPlayerController: {fileID: 1234312725}
   spawnLocations:
