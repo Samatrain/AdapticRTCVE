@@ -151,7 +151,7 @@ public class NetworkMannager : Photon.PunBehaviour, IPunObservable
             }
         }
 
-        // 🏆 Spawn the VR Player and Disable Non-Local Controls
+        //Spawn the VR Player and Disable Non-Local Controls
         levelMannager.spawnConnectedPlayer();
         disableNonLocalVRControls();
     }
