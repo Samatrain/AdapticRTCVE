@@ -8019,6 +8019,26 @@ PrefabInstance:
       propertyPath: ownershipTransfer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 759323690192919204, guid: ce816f2e6abb0504092c23ed9b970dfd,
+        type: 3}
+      propertyPath: viewIdField
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 759323690192919204, guid: ce816f2e6abb0504092c23ed9b970dfd,
+        type: 3}
+      propertyPath: instantiationId
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 2475141085376120855, guid: ce816f2e6abb0504092c23ed9b970dfd,
+        type: 3}
+      propertyPath: viewIdField
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2475141085376120855, guid: ce816f2e6abb0504092c23ed9b970dfd,
+        type: 3}
+      propertyPath: instantiationId
+      value: 22
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
 --- !u!1 &1057043728

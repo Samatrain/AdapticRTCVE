@@ -64,25 +64,12 @@ public class LevelMannager : Photon.PunBehaviour, IPunObservable
     //spawns the player using spawnPlayer
     public void spawnConnectedPlayer()
     {
+        string playerNickname = PhotonNetwork.player.NickName;
+        Transform spawnPosition = spawnLocations[PhotonNetwork.playerList.Length - 1];
 
-        //track which headset is being used
-        int platformSelected = PlayerPrefs.GetInt("Platform");
-        currentPlatform = (Platform)platformSelected;
-        //Debug.Log("The platform selected is: " + currentPlatform.ToString());
-        Instance = this;
+        GameObject playerInstance = PhotonNetwork.Instantiate("OVRPlayerController", spawnPosition.position, spawnPosition.rotation, 0);
 
-
-        //I think this coul be done in a better way. Check TODO
-        if (MasterController.LocalPlayerInstance == null)
-        {
-            PhotonPlayer actualPlayer = PhotonNetwork.player;
-            //Debug.Log("Nickname of the local is " + actualPlayer.NickName);
-            spawnPlayer(actualPlayer.NickName, currentPlatform); //spanw player at currentplatform location
-        }
-        else
-        {
-            //Debug.Log("Ignoring scene load for " + SceneManager.GetActiveScene().name);
-        }
+        Debug.Log("Spawned player: " + playerNickname + " at " + spawnPosition.position);
     }
 
     //calculates spawn position based on player's id

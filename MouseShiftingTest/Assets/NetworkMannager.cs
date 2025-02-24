@@ -139,10 +139,8 @@ public class NetworkMannager : Photon.PunBehaviour, IPunObservable
     // This method is called when you as a player connect to the game room
     public override void OnJoinedRoom()
     {
-
-        //#Critical: We only load if we are the first player, else we rely on  PhotonNetwork.automaticallySyncScene to sync our instance scene.
-        // This part sets the players name according to it's connecting position
         PhotonPlayer[] players = PhotonNetwork.playerList;
+
         for (int i = 0; i < players.Length; i++)
         {
             PhotonPlayer temp = players[i];
@@ -150,12 +148,33 @@ public class NetworkMannager : Photon.PunBehaviour, IPunObservable
             {
                 temp.NickName = "Player " + i;
                 photonView.RPC("ActivatePlayer", PhotonTargets.All, i, true);
-                
             }
         }
-        bool isHost = PhotonNetwork.isMasterClient;
+
+        // 🏆 Spawn the VR Player and Disable Non-Local Controls
         levelMannager.spawnConnectedPlayer();
-        // Debug.Log("INFO IMPORTANTE : InstantiateOnNetwork is: " + PhotonNetwork.InstantiateInRoomOnly + " , inRoom: " + PhotonNetwork.inRoom);
+        disableNonLocalVRControls();
+    }
+
+    void disableNonLocalVRControls()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player"); // Make sure OVR Rig has this tag
+
+        foreach (GameObject player in players)
+        {
+            PhotonView pv = player.GetComponent<PhotonView>();
+            OVRCameraRig cameraRig = player.GetComponentInChildren<OVRCameraRig>();
+
+            if (pv != null && !pv.isMine)
+            {
+                // Disable camera for non-local players
+                if (cameraRig != null)
+                {
+                    cameraRig.enabled = false;
+                    player.GetComponent<AudioListener>().enabled = false;
+                }
+            }
+        }
     }
     public override void OnPhotonPlayerConnected(PhotonPlayer other)
     {

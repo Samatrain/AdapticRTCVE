@@ -595,6 +595,7 @@
      <Compile Include="Assets\ViveHandTracking\Utility\ModelRenderer.cs" />
      <Compile Include="Assets\ViveTracker.cs" />
      <Compile Include="Assets\VOMannager.cs" />
+     <Compile Include="Assets\VRPlayerNetwork.cs" />
      <Compile Include="Assets\WaveVR\Extra\Beam.cs" />
      <Compile Include="Assets\WaveVR\Extra\ControllerConnectionStateReactor.cs" />
      <Compile Include="Assets\WaveVR\Extra\ControllerFadeManager.cs" />
