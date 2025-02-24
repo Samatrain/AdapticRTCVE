@@ -156,6 +156,9 @@ public class NetworkMannager : Photon.PunBehaviour, IPunObservable
         disableNonLocalVRControls();
     }
 
+    //Revisit this maybe to make sure one player isn't using the other?
+    //  It seems like right now, the 2nd player isn't being differentiated from the first,
+    //  so they're both attached to the first OVR rig. Maybe I need to put a 2nd one in the outliner but it should be creating a new prefab
     void disableNonLocalVRControls()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player"); // Make sure OVR Rig has this tag

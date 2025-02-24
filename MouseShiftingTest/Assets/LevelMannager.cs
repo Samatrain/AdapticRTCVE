@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
+using Photon.Realtime;
 
 public class LevelMannager : Photon.PunBehaviour, IPunObservable
 {
@@ -43,6 +45,9 @@ public class LevelMannager : Photon.PunBehaviour, IPunObservable
     // Array of users
     public MasterController[] users;
 
+    //Parent object for VR player rigs
+    public GameObject vrPlayersParent;
+
     public int playerId;
 
     // Start is called before the first frame update
@@ -51,6 +56,11 @@ public class LevelMannager : Photon.PunBehaviour, IPunObservable
         if (UserOVRPlayerController == null)
         {
             Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'LevelMannager'", this);
+        }
+
+        if (PhotonNetwork.connected)
+        {
+            //AssignVRRig();
         }
     }
 
@@ -70,6 +80,12 @@ public class LevelMannager : Photon.PunBehaviour, IPunObservable
         GameObject playerInstance = PhotonNetwork.Instantiate("OVRPlayerController", spawnPosition.position, spawnPosition.rotation, 0);
 
         Debug.Log("Spawned player: " + playerNickname + " at " + spawnPosition.position);
+
+        //Set the parent of hte instantiated OVR rig to the "VRPlayers" parent
+        if(vrPlayersParent != null)
+        {
+            playerInstance.transform.SetParent(vrPlayersParent.transform);
+        }
     }
 
     //calculates spawn position based on player's id
@@ -102,6 +118,13 @@ public class LevelMannager : Photon.PunBehaviour, IPunObservable
         {
             GameObject playerInstance = PhotonNetwork.Instantiate(prefabName, spawnPosition.position, spawnPosition.rotation, 0);
 
+            PhotonView playerView = playerInstance.GetComponent<PhotonView>();
+            playerView.TransferOwnership(PhotonNetwork.player);
+
+            if(vrPlayersParent != null)
+            {
+                playerInstance.transform.SetParent(vrPlayersParent.transform);
+            }
         }
         else
         {
@@ -133,3 +156,5 @@ public class LevelMannager : Photon.PunBehaviour, IPunObservable
         //throw new NotImplementedException();
     }
 }
+
+
